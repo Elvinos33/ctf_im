@@ -11,10 +11,12 @@
   }
 </script>
 
-<button class="" use:popup={popupUser}>
+<button class="rounded-full w-fit h-fit" use:popup={popupUser}>
   <img src="{$page.data.session?.user ? $page.data.session.user.image : ''}" alt="Profile Picture" width="32" height="32" class="rounded-full"/>
 </button>
 
-<div class=" arrow card flex flex-col items-center rounded" data-popup="popupUser">
-  <button class="btn" on:click={signOut}>Sign Out</button>
+<div class="card rounded" data-popup="popupUser">
+  <div class="arrow" />
+  <a class="btn rounded-t rounded-b-none" href="/account">Account</a>
+  <button class="btn rounded-b rounded-t-none" on:click={signOut}>Sign Out</button>
 </div>

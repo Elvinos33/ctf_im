@@ -4,6 +4,7 @@
   import Header from "../components/header.svelte"
   import { initializeStores, Modal } from '@skeletonlabs/skeleton';
   import Task from '../components/modals/Task.svelte';
+  import prisma from '$lib/prisma';
 
   initializeStores();
 
@@ -14,7 +15,31 @@
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
+  import { page } from '$app/stores';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+  async function checkForUser() {
+    console.log("yolo")
+    if ($page.data.session?.user) {
+      let user = await prisma.user.findFirst({
+        where: {
+          username: $page.data.session.user.name
+        }
+      })
+
+      if (!user) {
+        await prisma.user.create({
+          data: {
+            username: $page.data.session.user.name,
+            points: 0,
+            completed: []
+          }
+        })  
+      }
+    }
+  }
+
+  checkForUser()
 </script>
 
 <Modal components={modalRegistry} />

@@ -12,7 +12,7 @@
       component: 'taskModal',
       title: taskCardProps.title,
       body: taskCardProps.content,
-      meta: {points: taskCardProps.points, url: taskCardProps.url}
+      meta: {points: taskCardProps.points, url: taskCardProps.url, solution: taskCardProps.solution, id: taskCardProps.id}
     }
     modalStore.trigger(taskModal)
   }

@@ -24,6 +24,7 @@
 </script>
 
 <div class="flex flex-col items-center">
+  <h1 class="h2 font-bold m-5">CHALLENGES</h1>
   {#each organizedTasks as typeTasks}
     <TaskContainer taskContainerProps={typeTasks} />
   {/each}

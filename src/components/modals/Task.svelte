@@ -3,9 +3,34 @@
   import { getModalStore } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import { signIn } from "@auth/sveltekit/client";
+  import { completedTasks } from "$lib/stores"
 
   const modalStore = getModalStore();
   export let parent: SvelteComponent;
+
+  let answer: string = ''
+
+  console.log($completedTasks)
+
+  async function submitAnswer(answer: string, solution: string) {
+    const requestData = {
+      username: $page.data.session.user.name,
+      task: $modalStore[0].title,
+      points: $modalStore[0].meta.points
+    }
+
+    if (answer === solution && answer.length > 0) {
+      if ($completedTasks.includes(requestData.task)) {
+        console.log("You have already answered this!")
+        return
+      }
+      await fetch("/challenges", {
+        method: 'POST',
+        body: JSON.stringify({requestData})
+      })
+      $completedTasks.push(requestData.task)
+    }
+  }
 
 </script>
 
@@ -22,9 +47,9 @@
         <a class="text-primary-300 hover:text-primary-500 hover:underline" href="{$modalStore[0].meta.url}">{$modalStore[0].meta.url}</a>
       </div>
     {/if}
-    <form class="flex flex-col gap-2 justify-center" action="">
+    <form on:submit={() => submitAnswer(answer, $modalStore[0].meta.solution)} class="flex flex-col gap-2 justify-center" action="">
       {#if $page.data.session?.user}
-        <input class="input rounded" type="text">
+        <input bind:value={answer} class="input rounded" type="text">
         <button class="btn variant-filled-primary rounded">Submit</button>
       {:else}
         <div class="input rounded p-3">You must be signed in to submit an answer</div>
