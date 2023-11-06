@@ -1,20 +1,24 @@
 <script lang="ts">
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import type { TaskCardProps } from "$lib/types"
 
   const modalStore = getModalStore();
+
+  export let taskCardProps: TaskCardProps
 
   function triggerModal() {
     const taskModal: ModalSettings = {
       type: 'component',
       component: 'taskModal',
-      title: "I can't find my table",
-      body: 'Please help find my table'
+      title: taskCardProps.title,
+      body: taskCardProps.content,
+      image: taskCardProps.url,
     }
     modalStore.trigger(taskModal)
   }
 </script>
 
-<button on:click={triggerModal} class="w-[20rem] m-2 card p-5 flex justify-between">
-  <p>I can't find my table!</p>
-  <p class="opacity-50">973</p>
+<button on:click={triggerModal} class="w-[20rem] m-2 card rounded p-5 flex justify-between">
+  <p>{taskCardProps.title}</p>
+  <p class="opacity-50">{taskCardProps.points}</p>
 </button>

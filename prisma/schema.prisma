@@ -15,8 +15,10 @@ model Task {
   title     String
   content   String
   url       String
+  points    Int
   solution  String
   completed String[]
+  type      String
 }
 
 model User {
