@@ -12,13 +12,13 @@
       component: 'taskModal',
       title: taskCardProps.title,
       body: taskCardProps.content,
-      image: taskCardProps.url,
+      meta: {points: taskCardProps.points, url: taskCardProps.url}
     }
     modalStore.trigger(taskModal)
   }
 </script>
 
-<button on:click={triggerModal} class="w-[20rem] m-2 card rounded p-5 flex justify-between">
+<button on:click={triggerModal} class="w-[20rem] card rounded p-5 flex justify-between">
   <p>{taskCardProps.title}</p>
   <p class="opacity-50">{taskCardProps.points}</p>
 </button>

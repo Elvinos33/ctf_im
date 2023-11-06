@@ -11,12 +11,15 @@
 
 {#if $modalStore[0]}
   <div class="card rounded p-5 w-[25rem] md:w-[40rem] space-y-4">
-    <h3 class="text-xl h3 line-clamp-2 font-bold">{$modalStore[0].title ?? 'Title Missing'}</h3>
+    <div class="flex justify-between">
+      <h3 class="text-xl h3 line-clamp-2 font-bold">{$modalStore[0].title ?? 'Title Missing'}</h3>
+      <p class="opacity-50">{$modalStore[0].meta.points}</p>
+    </div>
     <p class="break-words">{$modalStore[0].body ?? 'Content Missing'}</p>
-    {#if $modalStore[0].image}
+    {#if $modalStore[0].meta.url}
       <div class="card p-3 rounded w-fit">
         <p class="opacity-50 mb-2">Material</p>
-        <a class="text-primary-300 hover:text-primary-500 hover:underline" href="{$modalStore[0].image}">{$modalStore[0].image}</a>
+        <a class="text-primary-300 hover:text-primary-500 hover:underline" href="{$modalStore[0].meta.url}">{$modalStore[0].meta.url}</a>
       </div>
     {/if}
     <form class="flex flex-col gap-2 justify-center" action="">

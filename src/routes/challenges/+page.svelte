@@ -1,16 +1,31 @@
-<script>
+<script lang="ts">
   import TaskCard from '../../components/TaskCard.svelte';
+  import type { OrganizedType } from '$lib/types'
+  import TaskContainer from '../../components/TaskContainer.svelte';
 
   export let data;
 
-  console.log(data)
+  let organizedTasks: Array<OrganizedType> = []
+
+  data.tasks.forEach(task => {
+    const {type, ...taskData} = task;
+
+
+    const existingGroup = organizedTasks.find(group => group.type === type);
+
+    if (existingGroup) {
+      existingGroup.items.push(taskData);
+    } else {
+      organizedTasks.push({type: type, items: [taskData] })
+    }
+  })
+
+  console.log(organizedTasks)
 </script>
 
-<div class="flex justify-center">
-  <div class=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-    {#each data.tasks as task}
-      <TaskCard taskCardProps={task} />
-    {/each}
-  </div>
+<div class="flex flex-col items-center">
+  {#each organizedTasks as typeTasks}
+    <TaskContainer taskContainerProps={typeTasks} />
+  {/each}
 
 </div>

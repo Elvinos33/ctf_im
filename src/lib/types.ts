@@ -2,5 +2,10 @@ export type TaskCardProps = {
   title: string
   content: string
   url: string
-  points: int
+  points: number
+}
+
+export type OrganizedType = {
+  type: string
+  items: Array<TaskCardProps>
 }

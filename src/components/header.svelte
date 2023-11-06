@@ -2,8 +2,9 @@
   import { AppBar } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import { signIn, signOut } from "@auth/sveltekit/client"
+  import UserDropdown from "./UserDropdown.svelte";
 
-  let user: string = "Not Logged in"
+  let user: any = "Not Logged in"
 
   $: console.log($page.data.session?.user)
 
@@ -13,11 +14,14 @@
 </script>
 
 <AppBar gridColumns="grid-cols-2" slotDefault="place-self-start" slotTrail="place-content-end">
-  <h2 class="h2 font-bold">{user}</h2>
+  <a href="/" class="h2 font-bold">CTF</a>
   <svelte:fragment slot="trail">
-    <button class="hover:border-b-2">Challenges</button>
-    <button class="hover:border-b-2">Scoreboard</button>
-    <button on:click={() => signIn('github')} class="btn variant-ghost-primary rounded">Login</button>
-    <button on:click={signOut} class="btn variant-ghost-primary rounded">Create Account</button>
-  </svelte:fragment>
+    <a href="/challenges" class="hover:border-b-2">Challenges</a>
+    <a href="/scoreboard" class="hover:border-b-2">Scoreboard</a>
+    {#if $page.data.session?.user}
+      <UserDropdown />
+    {:else}
+      <button on:click={() => signIn('github')} class="btn variant-ghost-primary rounded">Sign in</button>
+    {/if}
+r </svelte:fragment>
 </AppBar>
