@@ -23,5 +23,5 @@
     {:else}
       <button on:click={() => signIn('github')} class="btn variant-ghost-primary rounded">Sign in</button>
     {/if}
-r </svelte:fragment>
+ </svelte:fragment>
 </AppBar>

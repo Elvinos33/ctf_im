@@ -11,10 +11,10 @@
   }
 </script>
 
-<button use:popup={popupUser}>
+<button class="" use:popup={popupUser}>
   <img src="{$page.data.session?.user ? $page.data.session.user.image : ''}" alt="Profile Picture" width="32" height="32" class="rounded-full"/>
 </button>
 
-<div class="px-5 arrow card flex flex-col items-center rounded" data-popup="popupUser">
+<div class=" arrow card flex flex-col items-center rounded" data-popup="popupUser">
   <button class="btn" on:click={signOut}>Sign Out</button>
 </div>
