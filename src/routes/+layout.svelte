@@ -1,10 +1,12 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppShell, type ModalComponent } from '@skeletonlabs/skeleton';
+	import { AppShell } from '@skeletonlabs/skeleton';
+  import type { ModalComponent } from '@skeletonlabs/skeleton';
   import Header from "../components/header.svelte"
   import { initializeStores, Modal } from '@skeletonlabs/skeleton';
   import Task from '../components/modals/Task.svelte';
   import prisma from '$lib/prisma';
+  import { Toast } from '@skeletonlabs/skeleton';
 
   initializeStores();
 
@@ -41,6 +43,8 @@
 
   checkForUser()
 </script>
+
+<Toast />
 
 <Modal components={modalRegistry} />
 

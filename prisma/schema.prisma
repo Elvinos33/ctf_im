@@ -12,7 +12,7 @@ datasource db {
 
 model Task {
   id        Int     @id @default(autoincrement())
-  title     String  @uniqu
+  title     String  @unique
   content   String
   url       String
   points    Int

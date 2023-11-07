@@ -24,11 +24,13 @@
         console.log("You have already answered this!")
         return
       }
-      await fetch("/challenges", {
+      let response = await fetch("/challenges", {
         method: 'POST',
         body: JSON.stringify({requestData})
       })
-      $completedTasks.push(requestData.task)
+      if (response.status === 200) {
+        $completedTasks.push(requestData.task)
+      }
     }
   }
 
