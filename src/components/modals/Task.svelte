@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { SvelteComponent } from "svelte";
-  import { getModalStore } from "@skeletonlabs/skeleton";
+  import { getModalStore, getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import { signIn } from "@auth/sveltekit/client";
   import { completedTasks } from "$lib/stores"
+  import { json } from "@sveltejs/kit";
 
   const modalStore = getModalStore();
   export let parent: SvelteComponent;
+
+  const toastStore = getToastStore();
 
   let answer: string = ''
 
@@ -26,12 +29,29 @@
       }
       let response = await fetch("/challenges", {
         method: 'POST',
-        body: JSON.stringify({requestData})
+        body: JSON.stringify({requestData}),
+				headers: {
+					'Content-Type': 'application/json'
+				}
       })
+      const { message } = await response.json()
+      console.log(response)
       if (response.status === 200) {
         $completedTasks.push(requestData.task)
+        toast(message, "primary")
+      } else {
+        
       }
     }
+  }
+
+  function toast(message: string, type: string) {
+    const toast: ToastSettings = {
+      message: message,
+      background: `variant-filled-${type}`,
+      classes: "z-50"
+    }
+    toastStore.trigger(toast)
   }
 
 </script>

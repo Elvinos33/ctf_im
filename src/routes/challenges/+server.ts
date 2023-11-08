@@ -62,7 +62,7 @@ export async function POST({ request }) {
     // Task is already in the 'completed' array, do not update
     // Return an appropriate response indicating no update was necessary
     return new Response(JSON.stringify({ message: 'Task already completed' }), {
-      status: 200,
+      status: 403,
       headers: {
         'Content-Type': 'application/json',
       },
