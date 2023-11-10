@@ -24,7 +24,7 @@
 
     if (answer === solution && answer.length > 0) {
       if ($completedTasks.includes(requestData.task)) {
-        console.log("You have already answered this!")
+        toast("Task already completed", "error")
         return
       }
       let response = await fetch("/challenges", {
@@ -38,9 +38,9 @@
       console.log(response)
       if (response.status === 200) {
         $completedTasks.push(requestData.task)
-        toast(message, "primary")
+        toast(message, "success")
       } else {
-        
+        toast(message, "error")
       }
     }
   }
@@ -49,7 +49,6 @@
     const toast: ToastSettings = {
       message: message,
       background: `variant-filled-${type}`,
-      classes: "z-50"
     }
     toastStore.trigger(toast)
   }

@@ -44,7 +44,7 @@
   checkForUser()
 </script>
 
-<Toast />
+<Toast zIndex={"z-[2000]"} />
 
 <Modal components={modalRegistry} />
 
