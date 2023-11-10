@@ -17,6 +17,6 @@
 
 <div class="card rounded" data-popup="popupUser">
   <div class="arrow" />
-  <a class="btn rounded-t rounded-b-none" href="/account">Account</a>
+  <a class="btn rounded-t rounded-b-none" href="/user/{$page.data.session.user.name}">Account</a>
   <button class="btn rounded-b rounded-t-none" on:click={signOut}>Sign Out</button>
 </div>

@@ -16,3 +16,8 @@ export type answerType = {
   username: string
   task: number
 } 
+
+export type scoreboardType = {
+  username: string
+  points: number
+}
