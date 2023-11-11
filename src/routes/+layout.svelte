@@ -5,13 +5,15 @@
   import Header from "../components/header.svelte"
   import { initializeStores, Modal } from '@skeletonlabs/skeleton';
   import Task from '../components/modals/Task.svelte';
+  import Create from '../components/modals/create.svelte';
   import prisma from '$lib/prisma';
   import { Toast } from '@skeletonlabs/skeleton';
 
   initializeStores();
 
   const modalRegistry: Record<string, ModalComponent> = {
-    taskModal: { ref: Task }
+    taskModal: { ref: Task },
+    createChallenge: { ref: Create }
   }
 
 
@@ -22,7 +24,6 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
   async function checkForUser() {
-    console.log("yolo")
     if ($page.data.session?.user) {
       let user = await prisma.user.findFirst({
         where: {
@@ -35,7 +36,8 @@
           data: {
             username: $page.data.session.user.name,
             points: 0,
-            completed: []
+            completed: [],
+            isAdmin: false
           }
         })  
       }

@@ -17,7 +17,7 @@
 
   async function submitAnswer(answer: string, solution: string) {
     const requestData = {
-      username: $page.data.session.user.name,
+      username: $page.data.session?.user?.name,
       task: $modalStore[0].title,
       points: $modalStore[0].meta.points
     }
@@ -27,7 +27,7 @@
         toast("Task already completed", "error")
         return
       }
-      let response = await fetch("/challenges", {
+      let response = await fetch("/challenges/submit", {
         method: 'POST',
         body: JSON.stringify({requestData}),
 				headers: {

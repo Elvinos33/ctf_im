@@ -4,7 +4,7 @@
   export let data;
 </script>
 
-<div class="flex flex-col my-4 items-center w-full">
-  <h2 class="h2 text-center">SCOREBOARD</h2>
+<div class="flex flex-col items-center w-full">
+  <h2 class="h2 m-5 font-bold text-center">SCOREBOARD</h2>
   <Scoreboard scoreboardProps={data.sortedUsers} />
 </div>

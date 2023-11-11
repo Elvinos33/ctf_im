@@ -26,4 +26,5 @@ model User {
   username  String  @unique
   points    Int
   completed String[]
+  isAdmin   Boolean
 }

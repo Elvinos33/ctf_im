@@ -1,0 +1,8 @@
+import { writable } from "svelte/store";
+import { USR_ADMIN } from "$env/static/private";
+
+export let completedTasks = writable([])
+export let admins = writable(USR_ADMIN.split(","));
+
+console.log(admins)
+

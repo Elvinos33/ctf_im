@@ -1,5 +1,4 @@
 import prisma from "$lib/prisma";
-import { completedTasks } from "$lib/stores";
 
 export async function POST({ request }) {
   const { requestData } = await request.json();
@@ -52,7 +51,7 @@ export async function POST({ request }) {
     })
 
     // Return a success response
-    return new Response(JSON.stringify({ message: 'Task added to completed' }), {
+    return new Response(JSON.stringify({ message: 'Task completed' }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
